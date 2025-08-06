@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>打工纪念日</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #fff5f5;
+      font-family: "Arial Rounded MT Bold", sans-serif;
+    }
+    .container {
+      text-align: center;
+      background: #fff1f0;
+      padding: 2em;
+      border-radius: 1.5em;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      max-width: 90vw;
+    }
+    .title {
+      font-size: 1.8em;
+      color: #d32f2f;
+      margin-bottom: 0.5em;
+    }
+    .counter {
+      font-size: 2.5em;
+      font-weight: bold;
+      color: #b71c1c;
+    }
+    @media (max-width: 480px) {
+      .title { font-size: 1.4em; }
+      .counter { font-size: 2em; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="title">已经为极兔打工了</div>
+    <div class="counter" id="days">0天</div>
+  </div>
+
+  <script>
+    const startDate = new Date('2021-12-03');
+    const today = new Date();
+
+    // 只保留日期部分
+    startDate.setHours(0, 0, 0, 0);
+    today.setHours(0, 0, 0, 0);
+
+    const diffTime = today - startDate;
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+    document.getElementById("days").textContent = `${diffDays} 天`;
+  </script>
+</body>
+</html>
