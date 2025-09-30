@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>极兔打工纪念日</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="flex h-[100px] w-full items-start justify-center bg-white px-4">
+    <div class="relative rounded-lg p-4 text-left w-full max-w-none overflow-hidden bg-white shadow-lg border border-red-100">
+      <div class="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-red-50 opacity-50"></div>
+      <div class="absolute -bottom-10 -left-10 h-32 w-32 rounded-full bg-red-50 opacity-50"></div>
+      
+      <div class="relative z-10 flex items-center justify-between">
+        <div class="text-left">
+          <div class="mb-1 text-sm font-medium text-red-500">极兔速递 · J&T Express</div>
+          <h1 class="text-2xl font-bold text-red-700">已经为极兔打工了</h1>
+        </div>
+        
+        <div class="flex items-center gap-4">
+          <div class="relative">
+            <div class="absolute -inset-3 rounded-full bg-red-100 opacity-30"></div>
+            <div id="days-counter" class="relative text-5xl font-extrabold text-red-600">0</div>
+          </div>
+          <div class="text-2xl font-semibold text-red-500">天</div>
+        </div>
+        
+        <div class="w-1/3 min-w-[300px]">
+          <div class="mb-2 flex justify-between text-sm text-red-600">
+            <span>2021-12-03</span>
+            <span id="date-status">计算中...</span>
+          </div>
+          <div class="h-3 overflow-hidden rounded-full bg-red-100">
+            <div id="progress-bar" class="h-full bg-gradient-to-r from-red-400 to-red-600" style="width: 0%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const startDate = new Date('2021-12-03');
+      const today = new Date();
+
+      startDate.setHours(0, 0, 0, 0);
+      today.setHours(0, 0, 0, 0);
+
+      const diffTime = today.getTime() - startDate.getTime();
+      const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+      
+      let count = 0;
+      const daysCounter = document.getElementById('days-counter');
+      const progressBar = document.getElementById('progress-bar');
+      const dateStatus = document.getElementById('date-status');
+      
+      const interval = setInterval(() => {
+        count += Math.max(1, Math.ceil(diffDays / 100));
+        if (count >= diffDays) {
+          daysCounter.textContent = diffDays;
+          progressBar.style.width = `${Math.min(100, (diffDays / 1000) * 100)}%`;
+          dateStatus.textContent = "至今";
+          clearInterval(interval);
+        } else {
+          daysCounter.textContent = count;
+          progressBar.style.width = `${Math.min(100, (count / 1000) * 100)}%`;
+        }
+      }, 20);
+    });
+  </script>
+</body>
+</html>
